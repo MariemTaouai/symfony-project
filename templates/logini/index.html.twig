@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{# ... #}
+{% block body %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <form action="{{ path('app_logini') }}" method="post">
+    <label for="username">Email:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username
+    }}"/>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password"/>
+    {# If you want to control the URL the user is redirected to on success
+    <input type="hidden" name="_target_path" value="/account"/> #}
+    <input type="hidden" name="_target_path" value="/borrowing/"/>
+    <button class="btn btn-lg btn-info btn-block mt-3" type="submit">Login</button> 
+    <p>
+        <a href="{{ path('app_reset_password') }}">Forgot pass word</a> ?<br>         
+        Create one 
+        <a href="{{ path('app_register') }}">Compte ?</a> 
+    </p> 
+</form>
+{% endblock %}

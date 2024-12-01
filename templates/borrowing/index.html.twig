@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Borrowing index{% endblock %}
+
+{% block body %}
+    <h1>Borrowing index</h1>
+    
+
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date Borrowed</th>
+                <th>Book Returned</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for borrowing in borrowings %}
+            <tr>
+                <td>{{ borrowing.id }}</td>
+                <td>{{ borrowing.dateBorrowed ? borrowing.dateBorrowed|date('Y-m-d') : '' }}</td>
+                <td>{{ borrowing.bookReturned ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_borrowing_show', {'id': borrowing.id}) }}">Show</a>
+                    <a href="{{ path('app_borrowing_edit', {'id': borrowing.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_borrowing_new') }}">Create new</a>
+{% endblock %}
